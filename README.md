@@ -57,4 +57,12 @@ There is great within-POS variation in rotated distance - nouns and proper nouns
 Rotated distances is greater for words that are less frequent in the corpus. This seem to be an undesirable feature. 
 ![Figure 1](./Figures/Pseudo_aligned_distances_by_count.png?raw=true "Title")
 
+#### Inspecting individual words
+The 50 words with the largest difference are:
+> ['ding_PROPN', 'boop_PROPN', 'vis_X', 'totesmessenger_PROPN', 'bloop_ADJ', 'faq_NOUN', 'drs_NOUN', '0aremindme_NUM', '0a_PROPN', 'helperbot_PROPN', 'bleep_ADJ', 'remindmebot_NOUN', 'yada_PROPN', 'yadda_PROPN', 'footer_NOUN', 'sort_ADJ', 'album_NOUN', 'gifs_NOUN', 'utc_NOUN', 'webpage_NOUN', 'spade_NOUN', 'borrower_NOUN', 'download_VERB', 'llc_PROPN', 'sneakpeekbot_PROPN', 'autotldr_NOUN', 'resubmit_VERB', 'blah_INTJ', '31b9fm_NUM', 'clickablelinkbot_NOUN', '0anote_X', 'darkness_NOUN', 'queer_NOUN', 'realdonaldtrump_NOUN', 'sachs_PROPN', '31bfht_ADJ', 'chrome_PROPN', 'arlington_PROPN', 'thurmond_PROPN', 'jul_PROPN', 'lago_PROPN', 'jacobs_PROPN', 'ba_PROPN', 'bain_PROPN', 'intensity_NOUN', 'oecd_PROPN', 'fy_PROPN', '3a_PROPN', 'cloture_NOUN', 'v1_NOUN']
+
+The 50 words with the smallest difference are:
+
+
+
 
