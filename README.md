@@ -67,4 +67,8 @@ The 50 words with the smallest rotated difference are:
 
 > ['actually_ADV', 'probably_ADV', 'know_VERB', 'think_VERB', 'guy_NOUN', 'maybe_ADV', 'gt_INTJ', 'mean_VERB', 'thing_NOUN', 'happen_VERB', 'sure_ADJ', 'go_VERB', 'gt_CCONJ', 'say_VERB', 'simply_ADV', 'lol_PROPN', 'instead_ADV', 'believe_VERB', 'yeah_INTJ', 'people_NOUN', 'obviously_ADV', 'lot_NOUN', 'guess_VERB', 'time_NOUN', 'start_VERB', 'especially_ADV', 'right_ADV', 'problem_NOUN', 'consider_VERB', 'talk_VERB', 'idea_NOUN', 'like_SCONJ', 'exactly_ADV', 'try_VERB', 'tell_VERB', 'continue_VERB', 'well_ADJ', 'reason_NOUN', 'support_VERB', 'get_VERB', 'win_VERB', 'bad_ADJ', 'certainly_ADV', 'work_VERB', 'good_ADJ', 'help_VERB', 'literally_ADV', 'fact_NOUN', 'call_VERB', 'come_VERB']
 
+Based on the plot above, there seems to be a small number of highly used words with relative high distance. Among words used at least 80.000 times in at least one of the subreddits, the ten words with the largest rotated distance are:
+
+> ['wiki_NOUN', 'karma_PROPN', 'bot_NOUN', 'automatically_ADV', 'perform_VERB', 'compose_VERB', 'contact_VERB', 'moderator_NOUN', 'delete_VERB', 'comment_VERB']
+
 
