@@ -64,7 +64,7 @@ One explanation for the relation between word frequency and aligned distance, mi
 * Words that appear more frequently might be placed closer to the embedding center to minimize the avg. distance to context words   
 
 This seems to be the case
-![Figure 4](./Figures/Distance_to_center_by_count.png?raw=true "Title")
+![Figure 4](./Figures/Distances_to_center_by_count.png?raw=true "Title")
 
 #### Inspecting individual words
 The 50 words with the largest rotated difference are:
