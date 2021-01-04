@@ -51,7 +51,7 @@ The two approaches generate very similar distributions of rotated distances.
 ![Figure 1](./Figures/Aligned_distances.png)
 
 #### Squared euclidean distance by POS-type
-There is great within-POS variation in rotated distance - nouns and proper nouns are highest on average.
+There is great within-POS variation in rotated distance. Noun-parts (NOUN, ADJ, PROPN) seem a little higher, but the difference migth be insignificant.
 ![Figure 2](./Figures/Aligned_distances_by_POS.png)
 
 #### Squared euclidean distance by corpus frequency
