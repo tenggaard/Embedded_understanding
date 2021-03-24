@@ -28,12 +28,36 @@ But is it possible to formalize certain properties of such 'interesting' words a
 
 In this project, I will attempt to formalize computational methods, that can identify words, that are understood most differently between two corpora, although they apparently seem to refer to the same. More specifically, I will attempt to utilize word embeddings to elicit differences in how words are used, and subsequently explore whether this can be interpreted as differences in understanding.
 
-Polysemy (many-sign, many meanings or significations) is sometimes 'reduced' to a shared set of categories (fx. apple reffering to either a fruit or a company). But even for one of these options (e.g. apple as a company), how different people understand what apple is might be very polysemic. This does not refer to ones sentiment towards apple (whether one supports, barely knows of or hates apple products, although it might be related), but to the very way in which apple is understood by the subject using the word.
+Polysemy (many-sign, many meanings or significations) is sometimes 'reduced' to a set of disjoint contexts (e.g. apple reffering to either a fruit or a company). But even for one of these options (e.g. apple as a company), how different people understand what apple is might be very polysemic. This does not refer to ones sentiment towards apple (whether one supports, barely knows of or hates apple products, although it might be related), but to the very way in which apple is understood by the subject using the word.
 
-One might e.g. expect that what apple is on r/Capitalism is different from what it is on e.g. r/Socialism or r/Technology. Such difference might at first not seem to hinder debates and discussions - they do to some degree all agree on what apple points out or refers to (what it denotes). But these differences might nonetheless represent what could tentatively be called dis-understanding; situations in which the 'real' reference seem agreed upon, yet what that reference is, is contested.     
+One might e.g. expect that what apple is on r/Capitalism is different from what it is on e.g. r/Socialism or r/Technology. Such difference might at first not seem to hinder debates and discussions - they do to some degree all agree on what apple points out or refers to (what it denotes). But these differences might nonetheless represent what could tentatively perhaps be called dis-understanding; situations in which the 'real' reference seem agreed upon, yet what that reference is, is contested.     
+
+# Approach
+
+The idea I have pursued so far is a 'direct, global' comparison of two static embeddings:
+1. Train an embedding on two corpora 
+1. Align the embeddings, by rotating one of the embeddings to best match the other (orthogonal transformation)
+1. Identify words with highest and lowest aligned distance
+
+I have also considered the following alternatives:
+1. Indirect, static comparison of two embedding (i.e. measures that do not require alignment)
+    1. Indirect, global comparison: For each word, compare its distance to all other words between the two embeddings
+    1. Indirect, local comparison: For each word, compare its neighboorhodd, e.g. the overlap among the N nearest neighbors
+1. Dynamic embedding of single corpus: 
+    1. Obtain a representation of each token of each word type in the combined corpus, from a pretrained, dynamic embedding (e.g. from BERT, perhaps with finetuning)
+    1. Cluster the word representations for each type (to capture disjoint context such as apple (fruit) and apple (company). That is, each word is now split up into multiple senses.
+    1. For each cluster (word sense), calculate a measure of dispersion - highly dispersed clusters would be candidate words
+    1. One advantage, is that this would also allow for a more targeted local projection, only based on other words associated to the particular sense of the word type
+    1. One disadvantage is that the dispersion might not relate to between-corpora differences, but could be due to within-corpus effects. This would still be interesting, particular if I can somehow couple this to authors/subreddits.  
+1. Dynamic embedding of two corpora:    
+    1. Similar to first three steps for the dynamic embedding of single corpus - clusters obtained across corpora, to ensure they are shared
+    1. Splitting by corpora, each token is then assigned to the nearest cluster
+    1. Instead of calculating cluster dispersion, this would for each cluster (each sense of each word) then measure the distance between the clusters in the two corpora.
+    
+Unfortunately (in terms of being new) / encouraging (in terms of being feasible and promising), something along the lines of the dynamic options above has was published last year: [Analysing Lexical Semantic Change with Contextualised Word Representations](https://www.aclweb.org/anthology/2020.acl-main.365/) 
 
 
-# Methodology
+# Embedding methodology
 
 The embedding of a corpus is an attempt to represent (semantic) similarities between words based on the distribution (co-occurence) of words in the corpus. Here, I will briefly elaborate on three challenges when working with word embeddings, and how handling these challenges might look, when the focus is to represent a particular corpus as well as possible (as opposed to say generalize the embedding to be usable in different settings):
 1. Corpus preprocessing prior to embedding
@@ -51,8 +75,7 @@ Training word embeddings require making choices in two areas:
     1. Architecture parameters: The model for transforming words to vectors often involve several parameters. A common one is the window-size - how close (in number of tokens) must to word-types be in order to count as associated.
     1. Learning paramters: In addition, the learning procedure entails hyper parameters, such the number of epochs (the number of times the corpus is ingested) or the learning rate (how 'aggressively' the model updates its internal parameters).
 
-Ideally, choices should be made based on an understanding of how each decision affects properties of the embedding.  To the best of my (limited) knowledge, there is however still significant uncertainty about many of these relations. Based on what I have read:
-* TBD 
+Ideally, choices should be made based on an understanding of how each decision affects properties of the embedding.  To the best of my (limited) knowledge, there is however still significant uncertainty about many of these relations. 
 
 Hence, these choices are often made:
 * based on how well they have worked in other applications, raising questions of generalizability
@@ -62,16 +85,7 @@ Hence, these choices are often made:
 In addition to these explicit choices (often made implicit through default settings), word embeddings are stochastic - several of the steps involved rely on randomization (e.g. the initial allocation of word vectors, sampling of word pairs in a batch - this is not the case for PPMI embeddings). This leads to instability - applying the same set of choices multiple times will likely not lead to identical embeddings. 
 
 
-# Analysis so far
-
-The idea I have pursued so far is a 'direct, global' comparison of two embeddings:
-1. Train an embedding on two corpora 
-1. Align the embeddings, by rotating one of the embeddings to best match the other (orthogonal transformation)
-1. Identify words with highest and lowest aligned distance
-
-Indirect alternatives (i.e. measures that do not require explicit alignment) include:
-* Indirect, global comparison: For each word, compare its distance to all other words between the two embeddings
-* Indirect, local comparison: For each word, compare its neighboorhodd, e.g. the overlap among the N nearest neighbors
+# Empirical analysis so far
 
 
 ## Data
@@ -133,19 +147,22 @@ My initial hypothesis was that this was due to the following relations:
 
 ### The static embeddings correlates frequency and centrality (vector length)
 1. There 'wider' the use of a word is (i.e. the broader its set of context word is), the more the word is used (i.e. higher frequency).
-1. Also, the 'wider' the use of a word is, the more central the word is in the embedding (i.e. the shorter the length of demeaned vectors), as its position becomes a (weighted) average of the different contexts.
-1. Together, this imply that word frenquency and embedding centrality is correlated, which the plot below confirms:
+1. Also, the 'wider' the use of a word is, the more central the word is in the embedding (i.e. the shorter the length of demeaned vectors), as its position becomes a (weighted) average of its position in the different contexts.
+1. Together, this imply that word frenquency and distance to embedding center (centrality) is negatively correlated, which the plot below confirms for W2V and FT:
 
 ![Figure 4](./Figures/freq_centrality.png)
 
 Pearson correlation (republican, democrats): SVD (0.43, 0.42), W2V (-0.45, -0.43), FT (-0.32, -0.28)
 
-This is often an argument for normalizing embeddings, such that all words lie on the unit circle. Yet, even after doing so, the correlation still exist:
+Surprisingly, the correlation is opposite for the SVD-embedding - I don't know why.
 
-![Figure 4](./Figures/freq_centrality.png)
+This correlation is often an argument for normalizing embeddings, such that all words lie on the unit circle, and the inner product of two vectors reduces to the cosine of the angle between them. Yet, even after doing so, the correlation still exist:
 
-It seems that event the directions of the embedding vectors are not 'evenly' distributed over the direction space (some vectors are closer to the center than other), and that word frequency correlates with this direction center. 
+![Figure 4](./Figures/freq_normalized_centrality.png)
+
 Pearson correlation (republican, democrats): SVD (0.30, 0.27), W2V (-0.54, -0.53), FT (-0.33, -0.31)
+
+It seems that even the directions of the embedding vectors are not 'evenly' distributed over the direction space (some vectors are closer to the center than other), and that word frequency correlates with this direction center. Perhaps the degree of 'uniformity' is the relevant criteria to consider, when determining when to stop the embedding procedure? 
 
 ### The rotation alignment correlates centrality and aligned distance
 My first explanation was that aligning the central words would result in lower avg. aligned distance than aligning peripheral words, at least if the embedding distibution was non-uniform (as more words would then be located at the embedding center).
