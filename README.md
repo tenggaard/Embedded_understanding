@@ -8,7 +8,7 @@ Research project carried out by Thyge Enggaard under the supervision of Sune Leh
 - [Approach](#approach)
 - [Embedding methodology](#embedding-methodology)
   * [Corpus preprocessing](#corpus-preprocessing)
-  * [Embedding choices](#embedding-choices)
+  * [Embedding parameters](#embedding-parameters)
   * [Stochatic embeddings](#stochatic-embeddings)
 - [Empirical analysis so far](#empirical-analysis-so-far)
   * [Data](#data)
@@ -69,7 +69,7 @@ The embedding of a corpus is an attempt to represent (semantic) similarities bet
 Embedding the 'raw' corpus can pose various technical challenges (e.g. rare words, large vocabulary). Many pre-processing steps can be applied, e.g. removing words deemed 'unimportant' (often so called stop words), lemmatizing/stemming words, removing words with few characters and/or removing numbers. In addition, given the analysis, certain distinctions might be relevant to make explicit, such as the part-of-speech or grammatical tense or voice.    
 
 
-## Embedding choices
+## Embedding parameters
 Training word embeddings require making choices in two areas:
 1. Embedding architecture: There are many ways to obtain embeddings. At a high-level, I distinguish between embeddings that are static (e.g. (SVD-)PPMI, SGNS, Fasttext, Glove) and contextual/dynamic (e.g. BERT). Within each of these, many other considerations apply, such as whether the embedding should consider subword-information (e.g. Fasttext) or not (e.g. SGNS).
 1. Hyper parameters for the chosen architecture: Training word embeddings requires determining multiple hyper parameters in advance.
