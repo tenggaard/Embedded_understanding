@@ -1,5 +1,7 @@
-##### Table of Content
-- [Embedded Understanding](#embedded-understanding)
+
+# Embedded Understanding
+Research project carried out by Thyge Enggaard under the supervision of Sune Lehmann and Morten Axel Pedersen. 
+
 - [About this project](#about-this-project)
 - [Methodology](#methodology)
   * [Corpus preprocessing](#corpus-preprocessing)
@@ -14,10 +16,6 @@
     + [The static embeddings correlates frequency and centrality (vector length)](#the-static-embeddings-correlates-frequency-and-centrality--vector-length-)
     + [The rotation alignment correlates centrality and aligned distance](#the-rotation-alignment-correlates-centrality-and-aligned-distance)
 
-
-
-# Embedded Understanding
-Research project carried out by Thyge Enggaard under the supervision of Sune Lehmann and Morten Axel Pedersen. 
 
 # About this project
 Apparently, ~500m tweets are tweeted on Twitter per day, and ~2m comments are made on Reddit per day. For social scienties interested in studying what is being said (and debated, and misunderstood, and...) this pose a significant challenge to methods based on reading a corpus end-to-end.   
