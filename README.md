@@ -5,11 +5,12 @@ Research project carried out by Thyge Enggaard under the supervision of Sune Leh
 <!-- https://ecotrust-canada.github.io/markdown-toc/ -->
 
 - [About this project](#about-this-project)
-- [Methodology](#methodology)
+- [Approach](#approach)
+- [Embedding methodology](#embedding-methodology)
   * [Corpus preprocessing](#corpus-preprocessing)
   * [Embedding choices](#embedding-choices)
   * [Stochatic embeddings](#stochatic-embeddings)
-- [Analysis so far](#analysis-so-far)
+- [Empirical analysis so far](#empirical-analysis-so-far)
   * [Data](#data)
   * [Pre-processing of comments](#pre-processing-of-comments)
   * [Embeddings](#embeddings)
@@ -35,9 +36,9 @@ One might e.g. expect that what apple is on r/Capitalism is different from what 
 # Approach
 
 The idea I have pursued so far is a 'direct, global' comparison of two static embeddings:
-1. Train an embedding on two corpora 
-1. Align the embeddings, by rotating one of the embeddings to best match the other (orthogonal transformation)
-1. Identify words with highest and lowest aligned distance
+* Train an embedding on two corpora 
+* Align the embeddings, by rotating one of the embeddings to best match the other (orthogonal transformation)
+* Identify words with highest and lowest aligned distance
 
 I have also considered the following alternatives:
 1. Indirect, static comparison of two embedding (i.e. measures that do not require alignment)
@@ -140,7 +141,7 @@ TO DO
 ## Embedding properties and alignment
     
 Based on initial attempts to align the embeddings, I observe that the alignment is (heavily) correlated with frequency. The plot below shows the relation between frequency and centrality based on the Word2Vec embeddings
-![Figure 4](./Figures/Distances_to_center_by_count.png)
+![Figure](./Figures/Distances_to_center_by_count.png)
 
 
 My initial hypothesis was that this was due to the following relations:
@@ -150,7 +151,7 @@ My initial hypothesis was that this was due to the following relations:
 1. Also, the 'wider' the use of a word is, the more central the word is in the embedding (i.e. the shorter the length of demeaned vectors), as its position becomes a (weighted) average of its position in the different contexts.
 1. Together, this imply that word frenquency and distance to embedding center (centrality) is negatively correlated, which the plot below confirms for W2V and FT:
 
-![Figure 4](./Figures/freq_centrality.png)
+![Figure](./Figures/freq_centrality.png)
 
 Pearson correlation (republican, democrats): SVD (0.43, 0.42), W2V (-0.45, -0.43), FT (-0.32, -0.28)
 
@@ -158,7 +159,7 @@ Surprisingly, the correlation is opposite for the SVD-embedding - I don't know w
 
 This correlation is often an argument for normalizing embeddings, such that all words lie on the unit circle, and the inner product of two vectors reduces to the cosine of the angle between them. Yet, even after doing so, the correlation still exist:
 
-![Figure 4](./Figures/freq_normalized_centrality.png)
+![Figure](./Figures/freq_normalized_centrality.png)
 
 Pearson correlation (republican, democrats): SVD (0.30, 0.27), W2V (-0.54, -0.53), FT (-0.33, -0.31)
 
@@ -169,6 +170,6 @@ My first explanation was that aligning the central words would result in lower a
 
 To validate this, I simulated 2D-data. As the plot below shows, the simulation does not seem to support this explanation - there seem to be no correlation between centrality and aligned distance:
 
-![Figure 4](./Figures/simul_freq_centrality.png)
+![Figure](./Figures/simul_freq_centrality.png)
 
  
