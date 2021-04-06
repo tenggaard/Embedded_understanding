@@ -4,8 +4,8 @@ Research project carried out by Thyge Enggaard under the supervision of Sune Leh
 
 <!-- https://ecotrust-canada.github.io/markdown-toc/ -->
 
-- [About this project](#about-this-project)
-- [Approach](#approach)
+- [Studying contested meaning](#studying-contested-meaning)
+- [Methodological approaches](#methodological-approaches)
 - [Embedding methodology](#embedding-methodology)
   * [Corpus preprocessing](#corpus-preprocessing)
   * [Embedding parameters](#embedding-parameters)
@@ -20,7 +20,7 @@ Research project carried out by Thyge Enggaard under the supervision of Sune Leh
     + [The rotation alignment correlates centrality and aligned distance](#the-rotation-alignment-correlates-centrality-and-aligned-distance)
 
 
-# About this project
+# Studying contested meaning
 Apparently, ~500m tweets are tweeted on Twitter per day, and ~2m comments are made on Reddit per day. For social scienties interested in studying what is being said (and debated, and misunderstood, and...) this pose a significant challenge to methods based on reading a corpus end-to-end.   
 
 One option is to initially enter the corpus through a focus on particular words, that the researcher expects to be central for what is taking place. Local semantic networks or embedding projections might then help the researcher get a sense of which other words the targeted word is being used in relation to.
@@ -31,9 +31,14 @@ In this project, I will attempt to formalize computational methods, that can ide
 
 Polysemy (many-sign, many meanings or significations) is sometimes 'reduced' to a set of disjoint contexts (e.g. apple reffering to either a fruit or a company). But even for one of these options (e.g. apple as a company), how different people understand what apple is might be very polysemic. This does not refer to ones sentiment towards apple (whether one supports, barely knows of or hates apple products, although it might be related), but to the very way in which apple is understood by the subject using the word.
 
-One might e.g. expect that what apple is on r/Capitalism is different from what it is on e.g. r/Socialism or r/Technology. Such difference might at first not seem to hinder debates and discussions - they do to some degree all agree on what apple points out or refers to (what it denotes). But these differences might nonetheless represent what could tentatively perhaps be called dis-understanding; situations in which the 'real' reference seem agreed upon, yet what that reference is, is contested.     
+One might e.g. expect that what apple is on r/Capitalism is different from what it is on e.g. r/Socialism or r/Technology. Such difference might at first not seem to hinder debates and discussions - they do to some degree all agree on what apple points out or refers to (what it denotes). But these differences might nonetheless represent what could tentatively perhaps be called dis-understanding; situations in which the 'real' reference seem agreed upon, yet what that reference is, is contested.
 
-# Approach
+Literature/concepts, that might be relevant:
+* Floating signifier (Levi-Strauss)
+* Heteroglossia (Bakhtin)
+
+
+# Methodological approaches
 
 The idea I have pursued so far is a 'direct, global' comparison of two static embeddings:
 * Train an embedding on two corpora 
