@@ -149,11 +149,13 @@ TO DO
 
 ## Embedding properties and alignment
     
-Based on initial attempts to align the embeddings, I observe that aligned distrance is (heavily) correlatd with frequency - words that appear more frequently have lower aligned distance.
+Based on initial attempts to align the embeddings, I observe that aligned distance is (heavily) correlated with frequency - words that appear more frequently have lower aligned distance.
 
 ![Figure](./Figures/Aligned_distances_by_count.png)
 
 My initial hypothesis was that this was due to the following relations:
+1. The static embedding correlates frequeny and centrality
+1. The rotation alignment correlates centrality and aligned distance
 
 ### The static embeddings correlates frequency and centrality (vector length)
 1. There 'wider' the use of a word is (i.e. the broader its set of context word is), the more the word is used (i.e. higher frequency).
@@ -166,18 +168,24 @@ Pearson correlation (republican, democrats): SVD (0.43, 0.42), W2V (-0.45, -0.43
 
 Surprisingly, the correlation is opposite for the SVD-embedding - I don't know why.
 
-This correlation is often an argument for normalizing embeddings, such that all words lie on the unit circle, and the inner product of two vectors reduces to the cosine of the angle between them. Yet, even after doing so, the correlation still exist:
+This correlation is often an argument for normalizing embedding vectors, such that all words lie on the unit circle, and the inner product of two vectors reduces to the cosine of the angle between them, effectively comparing the direction of the vectors.
+
+If vector directions where evenly distributed over the 'direction space', the mean of the normalized vectors should be at the origin, and distances to the embedding center should be tightly distributed around 1.
+
+Yet, this is not the case, and further, it seems that embedding centrality still correlates with frequency:
 
 ![Figure](./Figures/freq_normalized_centrality.png)
 
 Pearson correlation (republican, democrats): SVD (0.30, 0.27), W2V (-0.54, -0.53), FT (-0.33, -0.31)
 
-It seems that even the directions of the embedding vectors are not 'evenly' distributed over the direction space (some vectors are closer to the center than other), and that word frequency correlates with this direction center. Perhaps the degree of 'uniformity' is the relevant criteria to consider, when determining when to stop the embedding procedure? 
+It hence seem that frequency is also 'encoded' in direction.
+* It might be possible to 'remove' this direction prior to aligning embeddings, e.g. by identifying a frequency direction (the hyperplane that maximizes the variance of projects words frequency, similar to PCA), identifying the normal plane to this direction and projection the embedding onto this normal plane ('loosing' one dimension of the embedding) 
+* Perhaps the degree of 'direction uniformity' is a relevant criteria to consider, when determining when to stop the embedding procedure? Perhaps it makes sense to explicitly include it in the loss function? 
 
 ### The rotation alignment correlates centrality and aligned distance
-My first explanation was that aligning the central words would result in lower avg. aligned distance than aligning peripheral words, at least if the embedding distibution was non-uniform (as more words would then be located at the embedding center).
+Here, my hypothesis was that aligning the central words would result in lower avg. aligned distance, than aligning peripheral words, at least if the embedding distibution was non-uniform (as more words would then be located at the embedding center).
 
-To validate this, I simulated 2D-data. As the plot below shows, the simulation does not seem to support this explanation - there seem to be no correlation between centrality and aligned distance:
+To validate this, I simulated 2D-data. However, as the plot below shows, the simulation does not seem to support this explanation - there seem to be no correlation between centrality and aligned distance:
 
 ![Figure](./Figures/simul_freq_centrality.png)
 
