@@ -16,8 +16,8 @@ Research project carried out by Thyge Enggaard under the supervision of Sune Leh
   * [Embeddings](#embeddings)
   * [Alignment](#alignment)
   * [Embedding properties and alignment](#embedding-properties-and-alignment)
-    + [The static embeddings correlates frequency and centrality (vector length)](#the-static-embeddings-correlates-frequency-and-centrality--vector-length-)
-    + [The rotation alignment correlates centrality and aligned distance](#the-rotation-alignment-correlates-centrality-and-aligned-distance)
+    + [Original embeddings](#original-embeddings)
+    + [Normalized embeddings](#normalized-embeddings)
 
 
 # Studying contested meaning
@@ -141,7 +141,7 @@ TO DO:
 ## Alignment
 To align the embeddings, I identify a matrix, R, that satisfies the following two criteria:
 1. R should preserve the structure of the embedding, in the sense that the length of vectors and angle between them should be unaffected. Mathematically, this imply that R should be an orthogonal matrix
-1. Transforming the embedding of r/Democrats by R should minimize the Forbenius/L2 distance between the embedding of r/Republicans and the transformed r/Democrats embedding. 
+1. Transforming the embedding of r/Democrats by R should minimize the Frobenius distance between the embedding of r/Republicans and the transformed r/Democrats embedding. 
 
 Finding the matrix R* that meets these criteria is known as the Orthogonal Procrustes problem, and has the following solution:
 * Let E_r and E_d denote the unrotated republican and democratic embeddings respectively
@@ -164,7 +164,7 @@ Given these correlations, the words with highest aligned distance are infrequent
 
 ### Normalized embeddings
 
-To avoid this, and in line with standard use in many NLP-settings, I normalize the embeddings, such that all words vectors have unit length. The Frobenius/L2 distance between the embeddings is now equal to 2 x (1 - the inner product), which is also equal to two times the cosine distance. Hence this distance measure effectively compares direction of vectors, with two words being farther apart, the more different their aligned directions are.
+To avoid this, and in line with standard use in many NLP-settings, I normalize the embeddings, such that all words vectors have unit length. The squared Frobenius distance between the embeddings is now equal to 2 x (1 - the inner product), which is also equal to two times the cosine distance. Hence the Frobenius distance effectively compares direction of vectors, with two words being farther apart, the more different their aligned directions are.
 
 The plot below shows the relation between aligned distance and word frequency for normalized embeddings.
 ![Figure](./Figures/normalized_freq_dist.png)
