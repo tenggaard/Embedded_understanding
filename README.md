@@ -155,7 +155,7 @@ TO DO
 
 ### Original embeddings
     
-The plot below shows the relation between aligned distance, word vector length and word frequency for the different embeddings:
+The plot below shows the relation between word frequency (x-axis), word vector length (y-axis) and aligned distance (color - black indicate words that only appear in one of the two embeddings and hence can't be aligned) for the different embeddings:
 ![Figure](./Figures/freq_length_dist.png)
 
 In general, aligned distance correlates highly with vector length (Pearson correlation between 0.76 and 0.94) and to some extent with  frequency (absolute Pearson correlation between 0.36 and 0.45 - correlation is positive for SVD and negative for W2V and FT, I don't know why this difference occur).
