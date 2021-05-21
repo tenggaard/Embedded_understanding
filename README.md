@@ -18,6 +18,7 @@ Research project carried out by Thyge Enggaard under the supervision of Sune Leh
   * [Embedding properties and alignment](#embedding-properties-and-alignment)
     + [Original embeddings](#original-embeddings)
     + [Normalized embeddings](#normalized-embeddings)
+  * [Stratified distance](#stratified-distance)
 
 
 # Studying contested meaning
@@ -189,13 +190,10 @@ Potential mechanisms, that might play a role:
 
 ## Stratified distance
 
-Given the difficulties in removing the correlation between frequency and aligned distance, I instead control for it based on a simple linear regression. Given the linear relation between aligned distance and log of count as evident above, I regress aligned distance on the logarithm of the average count across the two subreddits, and partition the words into based on the percentiles of the prediced distance. The tables below show the highest and lowest aligned distances for each of the these groups (columns indicate the corresponding percentile and number of words in each cluster).
+Given the difficulties in removing the correlation between frequency and aligned distance, I instead control for it based on a simple linear regression. Given the linear relation between aligned distance and log of count as evident above, I regress aligned distance on the logarithm of the average count across the two subreddits, and partition the words into groups based on the percentiles of the prediced distance. The tables below show the words with the highest and lowest aligned distances for each of these groups, as well as the corresponding aligned distance (columns indicate the corresponding percentile and number of words in each group).
 
-Highest aligned distance
+Highest aligned distance:
 ![Figure](./Figures/high_stratified_distance.png)
 
-
-Lowest aligned distance
+Lowest aligned distance:
 ![Figure](./Figures/low_stratified_distance.png)
-
-
