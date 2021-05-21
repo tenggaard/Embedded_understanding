@@ -186,3 +186,16 @@ Potential mechanisms, that might play a role:
     1. Based on simulated 2D-data (see plot below), this does not seem to be the case, even in the case of a non-uniformly distributed embedding:
 
 ![Figure](./Figures/simul_freq_centrality.png)
+
+## Stratified distance
+
+Given the difficulties in removing the correlation between frequency and aligned distance, below show aligned distance stratified by frequency - columns show the upper count range and total number of words in count range.
+
+Highest aligned distance
+![Figure](./Figures/high_stratified_distance.png)
+
+
+Lowest aligned distance
+![Figure](./Figures/low_stratified_distance.png)
+
+
