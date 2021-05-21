@@ -190,7 +190,7 @@ Potential mechanisms, that might play a role:
 
 ## Stratified distance
 
-Given the difficulties in removing the correlation between frequency and aligned distance, I instead control for it based on a simple linear regression. Given the linear relation between aligned distance and log of count as evident above, I regress aligned distance on the logarithm of the average count across the two subreddits, and partition the words into groups based on the percentiles of the prediced distance. The tables below show the words with the highest and lowest aligned distances for each of these groups, as well as the corresponding aligned distance (columns indicate the corresponding percentile and number of words in each group).
+Given the difficulties in removing the correlation between frequency and aligned distance, I instead control for it based on a simple linear regression. Given the linear relation between aligned distance and log of count as evident above, I regress aligned distance on the logarithm of the average count across the two subreddits, and partition the words into groups based on the percentiles of the prediced distance. The tables below show the nouns (incl. proper nouns) with the highest and lowest aligned distances for each of these groups, as well as the corresponding aligned distance (columns indicate the corresponding percentile and number of words in each group).
 
 Highest aligned distance:
 ![Figure](./Figures/high_stratified_distance.png)
